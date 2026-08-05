@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Registry · Department Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/department/css/department.css}" href="../static/css/department.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brandblock">
+      <span class="brand-mark">◆</span>
+      <div class="brand-text">
+        <span class="eyebrow">Campus Registry</span>
+        <h1>Department Management</h1>
+      </div>
+    </div>
+    <div class="topbar-meta">
+      <span class="meta-label">Session</span>
+      <span class="meta-value">Registrar · AY 2026–27</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="statline" aria-label="Registry summary">
+    <div class="stat">
+      <span class="stat-num" th:text="${#lists.size(departments)}">0</span>
+      <span class="stat-label">Departments</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num" th:text="${#aggregates.sum(departments.![duration])} ?: 0">0</span>
+      <span class="stat-label">Total Duration (Yrs)</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num" th:text="${#lists.size(departments)} + ' active'">0</span>
+      <span class="stat-label">Active Records</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <span class="tab-code">REC · NEW</span>
+      <h2>Department Information</h2>
+    </div>
+    <div class="card-body">
+      <form id="deptForm" th:object="${department}" autocomplete="off">
+        <div class="row">
+          <div class="form-group">
+            <label for="deptName">Department Name</label>
+            <input id="deptName" type="text" th:field="*{departmentName}" placeholder="e.g. Information Technology">
+          </div>
+          <div class="form-group">
+            <label for="degree">Degree</label>
+            <input id="degree" type="text" th:field="*{degree}" placeholder="e.g. B.E">
+          </div>
+          <div class="form-group form-group--narrow">
+            <label for="duration">Duration (Years)</label>
+            <input id="duration" type="number" th:field="*{duration}" min="1" max="6" placeholder="4">
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn btn--save" type="submit">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 3.5h9.5L16.5 6.5V16a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6.5 3.5V7.5H12V3.5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6.5 16.5V11.5H13V16.5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            Save record
+          </button>
+          <button class="btn btn--reset" type="reset">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 8a6 6 0 1 1 1.05 5.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M4 4.5V8h3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header table-header">
+      <div>
+        <span class="tab-code">REC · LIST</span>
+        <h2>Department Ledger</h2>
+      </div>
+      <div class="search-wrap">
+        <svg viewBox="0 0 20 20" fill="none" class="search-icon"><circle cx="8.5" cy="8.5" r="5" stroke="currentColor" stroke-width="1.4"/><path d="m16 16-3.2-3.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <input type="text" id="searchInput" placeholder="Search records…" aria-label="Search department ledger">
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Department</th>
+            <th>Degree</th>
+            <th>Duration</th>
+            <th class="col-action">Action</th>
+          </tr>
+        </thead>
+        <tbody id="deptTableBody">
+          <tr th:each="dept : ${departments}">
+            <td class="mono" th:text="${'DPT-' + #numbers.formatInteger(dept.id, 2)}">DPT-01</td>
+            <td class="cell-name" th:text="${dept.departmentName}">Department</td>
+            <td><span class="degree-tag" th:text="${dept.degree}">Degree</span></td>
+            <td><span class="badge" th:text="${dept.duration} + ' yrs'">4 yrs</span></td>
+            <td class="col-action">
+              <button class="icon-btn icon-btn--edit" type="button" title="Edit" th:attr="data-id=${dept.id},data-name=${dept.departmentName},data-degree=${dept.degree},data-duration=${dept.duration}" onclick="editDepartment(this)">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M12.5 3.5 16 7l-8.7 8.7-4 1 1-4L12.5 3.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="icon-btn icon-btn--delete" type="button" title="Delete" th:attr="data-id=${dept.id}" onclick="deleteDepartment(this)">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M4.5 6h11M8 6V4.5h4V6M6 6l.6 9.4a1 1 0 0 0 1 .9h4.8a1 1 0 0 0 1-.9L14 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr class="empty-row" th:if="${#lists.isEmpty(departments)}">
+            <td colspan="5">No departments recorded yet — add one above.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script th:src="@{/department/js/department.js}" src="../static/department/js/department.js"></script>
+
+</body>
+</html>

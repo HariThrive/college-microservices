@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Registry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14171F;
+    --canvas:#F3F5F8;
+    --surface:#FFFFFF;
+    --cobalt:#24408E;
+    --cobalt-deep:#182D66;
+    --amber:#E2A73E;
+    --slate:#D8DEE9;
+    --slate-soft:#EEF1F6;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ font-family:'Inter', sans-serif; background:var(--canvas); color:var(--ink); height:100vh; display:flex; flex-direction:column; }
+
+  .topbar{ background:var(--ink); border-bottom:3px solid var(--amber); flex:0 0 auto; }
+  .topbar-inner{ width:92%; max-width:1180px; margin:auto; padding:20px 0; display:flex; align-items:center; gap:14px; }
+  .brand-mark{ color:var(--amber); font-size:22px; line-height:1; }
+  .brand-text .eyebrow{ display:block; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#9AA5B8; margin-bottom:4px; }
+  .brand-text h1{ font-family:'Space Grotesk', sans-serif; color:#fff; font-size:20px; font-weight:600; }
+
+  .tabbar{ background:var(--surface); border-bottom:1px solid var(--slate); flex:0 0 auto; }
+  .tabbar-inner{ width:92%; max-width:1180px; margin:auto; display:flex; gap:4px; }
+
+  .tab{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 22px 12px;
+    font-size:14.5px;
+    font-weight:600;
+    color:#5B6474;
+    background:transparent;
+    border:none;
+    border-bottom:3px solid transparent;
+    cursor:pointer;
+    font-family:'Inter', sans-serif;
+    transition:color .15s ease, border-color .15s ease;
+  }
+
+  .tab .tab-code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.08em;
+    color:var(--cobalt);
+    background:#EAF0FB;
+    border:1px solid #CFDCF3;
+    padding:2px 7px;
+    border-radius:20px;
+  }
+
+  .tab:hover{ color:var(--ink); }
+
+  .tab.active{
+    color:var(--cobalt-deep);
+    border-bottom-color:var(--amber);
+  }
+
+  .panels{ flex:1 1 auto; position:relative; }
+
+  .panel{
+    position:absolute;
+    inset:0;
+    display:none;
+  }
+
+  .panel.active{ display:block; }
+
+  .panel iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    display:block;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand-mark">◆</span>
+    <div class="brand-text">
+      <span class="eyebrow">Campus Registry</span>
+      <h1>College Management System</h1>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="tabbar-inner">
+   <button class="tab active" data-panel="student-panel">
+<!--      <span class="tab-code">02</span>-->
+      Students
+    </button>
+    <button class="tab " data-panel="department-panel">
+<!--      <span class="tab-code">01</span>-->
+      Departments
+    </button>
+   
+  </div>
+</nav>
+
+<div class="panels">
+<div class="panel active" id="student-panel">
+    <iframe src="/student" title="Student Management"></iframe>
+  </div>
+  <div class="panel" id="department-panel">
+    <iframe src="/department" title="Department Management"></iframe>
+  </div>
+  
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.panel).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

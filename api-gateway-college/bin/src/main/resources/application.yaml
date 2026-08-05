@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: api-gateway-college
+  config:
+    import: "optional:configserver:http://localhost:8088"
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: student
+              uri: lb://student
+              predicates:
+                - Path=/student/**,student/css/**,student/js/**,/images/**
+            - id: department-college
+              uri: lb://department-college
+              predicates:
+                - Path=/department/**,department/css/**,department/js/**,/images/**
+server:
+  port: 8001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1234/eureka/
