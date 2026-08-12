@@ -29,7 +29,6 @@ public class StudentController {
 		String result = studentService.saveStudent(student);
 		return result;
 	}
-
 	
 	@GetMapping
 	public ModelAndView gotoStudent() {
