@@ -14,4 +14,6 @@ public interface StudentService {
 
 	List<DepartmentCollege> getAlldepartment();
 
+	List<StudentVO> departmentFallback(Exception e);
+
 }
