@@ -15,7 +15,7 @@ spring:
             - id: department-college
               uri: lb://department-college
               predicates:
-                - Path=/department/**,department/css/**,department/js/**,/images/**
+                - Path=/department/**,department/css/**,department/js/**,/images/**,/course/**
 server:
   port: 8001
 eureka:

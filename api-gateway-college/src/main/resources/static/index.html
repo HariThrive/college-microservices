@@ -97,25 +97,27 @@
 <nav class="tabbar">
   <div class="tabbar-inner">
    <button class="tab active" data-panel="student-panel">
-<!--      <span class="tab-code">02</span>-->
       Students
     </button>
-    <button class="tab " data-panel="department-panel">
-<!--      <span class="tab-code">01</span>-->
+    <button class="tab" data-panel="department-panel">
       Departments
     </button>
-   
+    <button class="tab" data-panel="course-panel">
+      Courses
+    </button>
   </div>
 </nav>
 
 <div class="panels">
-<div class="panel active" id="student-panel">
+  <div class="panel active" id="student-panel">
     <iframe src="/student" title="Student Management"></iframe>
   </div>
   <div class="panel" id="department-panel">
     <iframe src="/department" title="Department Management"></iframe>
   </div>
-  
+  <div class="panel" id="course-panel">
+    <iframe src="/course" title="Course Management"></iframe>
+  </div>
 </div>
 
 <script>
