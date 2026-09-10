@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.college.department_college.entity.DepartmentCollege;
+import com.college.department_college.service.CourseService;
 import com.college.department_college.service.DepartmentCollegeService;
+import com.college.department_college.vo.DepartmentCollegeVO;
 
 @Controller
 @RequestMapping("/department")
@@ -22,6 +24,9 @@ public class DepartmentCollegeController {
 	
 	@Autowired
 	private DepartmentCollegeService departmentCollegeService;
+	
+	@Autowired
+	CourseService courseService;
 	
 //	@PostMapping
 //	public String saveDepartment(@RequestBody DepartmentCollege department) {
@@ -43,14 +48,13 @@ public class DepartmentCollegeController {
 
 	    mv.addObject("department", new DepartmentCollege());
 
-	    mv.addObject("departments",
-	            departmentCollegeService.getAllDepartment());
+	    mv.addObject("departments",departmentCollegeService.getAllDepartment());
 
 	    return mv;
 	}
 	
 	@PostMapping("/save")
-	public ResponseEntity<?> saveDepartment(@ModelAttribute DepartmentCollege department) {
+	public ResponseEntity<?> saveDepartment(@ModelAttribute DepartmentCollegeVO department) {
 
 	    DepartmentCollege savedDepartment = departmentCollegeService.saveDepartmentCollege(department);
 

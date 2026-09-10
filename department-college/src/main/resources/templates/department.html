@@ -67,6 +67,27 @@
             <input id="duration" type="number" th:field="*{duration}" min="1" max="6" placeholder="4">
           </div>
         </div>
+        
+        <div class="courses-section">
+          <div class="courses-header">
+            <label>Courses</label>
+            <button type="button" class="btn btn--secondary btn--small" id="addCourseBtn">
+              <svg viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              Add Course
+            </button>
+          </div>
+          <div id="courseContainer" class="course-container">
+            <div class="course-row">
+             <select name="courses[]" class="course-select">
+                <option value="" disabled selected>Select a Course...</option>
+              </select>
+              <button type="button" class="icon-btn icon-btn--delete remove-course-btn" title="Remove Course">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M4.5 6h11M8 6V4.5h4V6M6 6l.6 9.4a1 1 0 0 0 1 .9h4.8a1 1 0 0 0 1-.9L14 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        
         <div class="button-group">
           <button class="btn btn--save" type="submit">
             <svg viewBox="0 0 20 20" fill="none"><path d="M4 3.5h9.5L16.5 6.5V16a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6.5 3.5V7.5H12V3.5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6.5 16.5V11.5H13V16.5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
