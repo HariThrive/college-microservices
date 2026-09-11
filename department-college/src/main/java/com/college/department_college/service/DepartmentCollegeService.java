@@ -15,4 +15,6 @@ public interface DepartmentCollegeService {
 
 	DepartmentCollege findByDepartmentId(Long departmentId);
 
+	DepartmentCollegeVO getDepartmentWithCourses(Long departmentId);
+
 }

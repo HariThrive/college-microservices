@@ -11,5 +11,5 @@ public class DepartmentCollegeVO {
 	private String departmentName;
 	private String degree;
 	private Integer duration;
-	private List<CourseVo> courseList;
+	private List<CourseVo> courses;
 }

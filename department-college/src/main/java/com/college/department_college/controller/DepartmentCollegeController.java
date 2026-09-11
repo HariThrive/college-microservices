@@ -66,4 +66,10 @@ public class DepartmentCollegeController {
 	public DepartmentCollege findByDepartmentId(@PathVariable Long departmentId) {
 	    return departmentCollegeService.findByDepartmentId(departmentId);
 	}
+
+	@GetMapping("/get/{departmentId}")
+	@ResponseBody
+	public DepartmentCollegeVO getDepartmentWithCourses(@PathVariable Long departmentId) {
+	    return departmentCollegeService.getDepartmentWithCourses(departmentId);
+	}
 }
