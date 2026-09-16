@@ -1,1 +1,92 @@
-<h1>hello</h1>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Registry · Score Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/result/css/score.css}" href="../static/result/css/score.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brandblock">
+      <span class="brand-mark">◆</span>
+      <div class="brand-text">
+        <span class="eyebrow">Campus Registry</span>
+        <h1>Score Management</h1>
+      </div>
+    </div>
+    <div class="topbar-meta">
+      <span class="meta-label">Session</span>
+      <span class="meta-value">Registrar · AY 2026–27</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="card">
+    <div class="card-header">
+      <span class="tab-code">REC · NEW</span>
+      <h2>Score Entry</h2>
+    </div>
+    <div class="card-body">
+      <form id="scoreForm" autocomplete="off">
+        <div class="row">
+          <div class="form-group">
+            <label for="studentSelect">Select Student</label>
+            <select id="studentSelect" name="studentId" class="select-control">
+              <option value="">-- Loading Students --</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="studentDetailsSection" style="display: none;">
+          <div class="row">
+            <div class="form-group">
+              <label>Name</label>
+              <input id="studentNameDisplay" type="text" readonly disabled>
+            </div>
+            <div class="form-group form-group--narrow">
+              <label>Age</label>
+              <input id="studentAgeDisplay" type="text" readonly disabled>
+            </div>
+            <div class="form-group">
+              <label>Department</label>
+              <input id="studentDeptDisplay" type="text" readonly disabled>
+            </div>
+          </div>
+
+          <div class="courses-section">
+            <div class="courses-header">
+              <label>Courses and Marks</label>
+            </div>
+            <div id="courseContainer" class="course-container">
+              <!-- Courses will be dynamically injected here -->
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button class="btn btn--save" type="submit">
+              <svg viewBox="0 0 20 20" fill="none"><path d="M4 3.5h9.5L16.5 6.5V16a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6.5 3.5V7.5H12V3.5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6.5 16.5V11.5H13V16.5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+              Save record
+            </button>
+            <button class="btn btn--reset" type="reset" id="resetBtn">
+              <svg viewBox="0 0 20 20" fill="none"><path d="M4 8a6 6 0 1 1 1.05 5.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M4 4.5V8h3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Reset
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<script th:src="@{/result/js/score.js}" src="../static/result/js/score.js"></script>
+</body>
+</html>
